@@ -1,0 +1,1693 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "mysql",
+  "tables": {
+    "actor": {
+      "name": "actor",
+      "columns": {
+        "actor_id": {
+          "autoincrement": true,
+          "name": "actor_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "autoincrement": false,
+          "name": "first_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "autoincrement": false,
+          "name": "last_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_actor_last_name": {
+          "name": "idx_actor_last_name",
+          "columns": [
+            "last_name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "address": {
+      "name": "address",
+      "columns": {
+        "address_id": {
+          "autoincrement": true,
+          "name": "address_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "autoincrement": false,
+          "name": "address",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address2": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "address2",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "district": {
+          "autoincrement": false,
+          "name": "district",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city_id": {
+          "autoincrement": false,
+          "name": "city_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "postal_code": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "postal_code",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "autoincrement": false,
+          "name": "phone",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_city_id": {
+          "name": "idx_fk_city_id",
+          "columns": [
+            "city_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_address_city": {
+          "name": "fk_address_city",
+          "tableFrom": "address",
+          "tableTo": "city",
+          "columnsFrom": [
+            "city_id"
+          ],
+          "columnsTo": [
+            "city_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "category": {
+      "name": "category",
+      "columns": {
+        "category_id": {
+          "autoincrement": true,
+          "name": "category_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "city": {
+      "name": "city",
+      "columns": {
+        "city_id": {
+          "autoincrement": true,
+          "name": "city_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "autoincrement": false,
+          "name": "city",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "country_id": {
+          "autoincrement": false,
+          "name": "country_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_country_id": {
+          "name": "idx_fk_country_id",
+          "columns": [
+            "country_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_city_country": {
+          "name": "fk_city_country",
+          "tableFrom": "city",
+          "tableTo": "country",
+          "columnsFrom": [
+            "country_id"
+          ],
+          "columnsTo": [
+            "country_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "country": {
+      "name": "country",
+      "columns": {
+        "country_id": {
+          "autoincrement": true,
+          "name": "country_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "country": {
+          "autoincrement": false,
+          "name": "country",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "customer": {
+      "name": "customer",
+      "columns": {
+        "customer_id": {
+          "autoincrement": true,
+          "name": "customer_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "store_id": {
+          "autoincrement": false,
+          "name": "store_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "autoincrement": false,
+          "name": "first_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "autoincrement": false,
+          "name": "last_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "email",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address_id": {
+          "autoincrement": false,
+          "name": "address_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "default": 1,
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "create_date": {
+          "autoincrement": false,
+          "name": "create_date",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_store_id": {
+          "name": "idx_fk_store_id",
+          "columns": [
+            "store_id"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_address_id": {
+          "name": "idx_fk_address_id",
+          "columns": [
+            "address_id"
+          ],
+          "isUnique": false
+        },
+        "idx_last_name": {
+          "name": "idx_last_name",
+          "columns": [
+            "last_name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_customer_address": {
+          "name": "fk_customer_address",
+          "tableFrom": "customer",
+          "tableTo": "address",
+          "columnsFrom": [
+            "address_id"
+          ],
+          "columnsTo": [
+            "address_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_customer_store": {
+          "name": "fk_customer_store",
+          "tableFrom": "customer",
+          "tableTo": "store",
+          "columnsFrom": [
+            "store_id"
+          ],
+          "columnsTo": [
+            "store_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "film": {
+      "name": "film",
+      "columns": {
+        "film_id": {
+          "autoincrement": true,
+          "name": "film_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "release_year": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "release_year",
+          "type": "year(4)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language_id": {
+          "autoincrement": false,
+          "name": "language_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "original_language_id": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "original_language_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rental_duration": {
+          "default": 3,
+          "autoincrement": false,
+          "name": "rental_duration",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rental_rate": {
+          "default": "'4.99'",
+          "autoincrement": false,
+          "name": "rental_rate",
+          "type": "decimal(4,2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "length": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "length",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "replacement_cost": {
+          "default": "'19.99'",
+          "autoincrement": false,
+          "name": "replacement_cost",
+          "type": "decimal(5,2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rating": {
+          "default": "'''G'''",
+          "autoincrement": false,
+          "name": "rating",
+          "type": "enum('G','PG','PG-13','R','NC-17')",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "special_features": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "special_features",
+          "type": "set('Trailers','Commentaries','Deleted Scenes','Behind the Scenes')",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_title": {
+          "name": "idx_title",
+          "columns": [
+            "title"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_language_id": {
+          "name": "idx_fk_language_id",
+          "columns": [
+            "language_id"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_original_language_id": {
+          "name": "idx_fk_original_language_id",
+          "columns": [
+            "original_language_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_film_language": {
+          "name": "fk_film_language",
+          "tableFrom": "film",
+          "tableTo": "language",
+          "columnsFrom": [
+            "language_id"
+          ],
+          "columnsTo": [
+            "language_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_film_language_original": {
+          "name": "fk_film_language_original",
+          "tableFrom": "film",
+          "tableTo": "language",
+          "columnsFrom": [
+            "original_language_id"
+          ],
+          "columnsTo": [
+            "language_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "film_actor": {
+      "name": "film_actor",
+      "columns": {
+        "actor_id": {
+          "autoincrement": false,
+          "name": "actor_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "film_id": {
+          "autoincrement": false,
+          "name": "film_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_film_id": {
+          "name": "idx_fk_film_id",
+          "columns": [
+            "film_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_film_actor_actor": {
+          "name": "fk_film_actor_actor",
+          "tableFrom": "film_actor",
+          "tableTo": "actor",
+          "columnsFrom": [
+            "actor_id"
+          ],
+          "columnsTo": [
+            "actor_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_film_actor_film": {
+          "name": "fk_film_actor_film",
+          "tableFrom": "film_actor",
+          "tableTo": "film",
+          "columnsFrom": [
+            "film_id"
+          ],
+          "columnsTo": [
+            "film_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "film_category": {
+      "name": "film_category",
+      "columns": {
+        "film_id": {
+          "autoincrement": false,
+          "name": "film_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category_id": {
+          "autoincrement": false,
+          "name": "category_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {
+        "fk_film_category_category": {
+          "name": "fk_film_category_category",
+          "tableFrom": "film_category",
+          "tableTo": "category",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "category_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_film_category_film": {
+          "name": "fk_film_category_film",
+          "tableFrom": "film_category",
+          "tableTo": "film",
+          "columnsFrom": [
+            "film_id"
+          ],
+          "columnsTo": [
+            "film_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "film_text": {
+      "name": "film_text",
+      "columns": {
+        "film_id": {
+          "autoincrement": false,
+          "name": "film_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_title_description": {
+          "name": "idx_title_description",
+          "columns": [
+            "title",
+            "description"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "inventory": {
+      "name": "inventory",
+      "columns": {
+        "inventory_id": {
+          "autoincrement": true,
+          "name": "inventory_id",
+          "type": "mediumint(8) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "film_id": {
+          "autoincrement": false,
+          "name": "film_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "store_id": {
+          "autoincrement": false,
+          "name": "store_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_film_id": {
+          "name": "idx_fk_film_id",
+          "columns": [
+            "film_id"
+          ],
+          "isUnique": false
+        },
+        "idx_store_id_film_id": {
+          "name": "idx_store_id_film_id",
+          "columns": [
+            "store_id",
+            "film_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_inventory_film": {
+          "name": "fk_inventory_film",
+          "tableFrom": "inventory",
+          "tableTo": "film",
+          "columnsFrom": [
+            "film_id"
+          ],
+          "columnsTo": [
+            "film_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_inventory_store": {
+          "name": "fk_inventory_store",
+          "tableFrom": "inventory",
+          "tableTo": "store",
+          "columnsFrom": [
+            "store_id"
+          ],
+          "columnsTo": [
+            "store_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "language": {
+      "name": "language",
+      "columns": {
+        "language_id": {
+          "autoincrement": true,
+          "name": "language_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "char(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "payment": {
+      "name": "payment",
+      "columns": {
+        "payment_id": {
+          "autoincrement": true,
+          "name": "payment_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_id": {
+          "autoincrement": false,
+          "name": "customer_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "staff_id": {
+          "autoincrement": false,
+          "name": "staff_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rental_id": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "rental_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "amount": {
+          "autoincrement": false,
+          "name": "amount",
+          "type": "decimal(5,2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payment_date": {
+          "autoincrement": false,
+          "name": "payment_date",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_staff_id": {
+          "name": "idx_fk_staff_id",
+          "columns": [
+            "staff_id"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_customer_id": {
+          "name": "idx_fk_customer_id",
+          "columns": [
+            "customer_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_payment_customer": {
+          "name": "fk_payment_customer",
+          "tableFrom": "payment",
+          "tableTo": "customer",
+          "columnsFrom": [
+            "customer_id"
+          ],
+          "columnsTo": [
+            "customer_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_payment_rental": {
+          "name": "fk_payment_rental",
+          "tableFrom": "payment",
+          "tableTo": "rental",
+          "columnsFrom": [
+            "rental_id"
+          ],
+          "columnsTo": [
+            "rental_id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "fk_payment_staff": {
+          "name": "fk_payment_staff",
+          "tableFrom": "payment",
+          "tableTo": "staff",
+          "columnsFrom": [
+            "staff_id"
+          ],
+          "columnsTo": [
+            "staff_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "rental": {
+      "name": "rental",
+      "columns": {
+        "rental_id": {
+          "autoincrement": true,
+          "name": "rental_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rental_date": {
+          "autoincrement": false,
+          "name": "rental_date",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "inventory_id": {
+          "autoincrement": false,
+          "name": "inventory_id",
+          "type": "mediumint(8) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_id": {
+          "autoincrement": false,
+          "name": "customer_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "return_date": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "return_date",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "staff_id": {
+          "autoincrement": false,
+          "name": "staff_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_inventory_id": {
+          "name": "idx_fk_inventory_id",
+          "columns": [
+            "inventory_id"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_customer_id": {
+          "name": "idx_fk_customer_id",
+          "columns": [
+            "customer_id"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_staff_id": {
+          "name": "idx_fk_staff_id",
+          "columns": [
+            "staff_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_rental_customer": {
+          "name": "fk_rental_customer",
+          "tableFrom": "rental",
+          "tableTo": "customer",
+          "columnsFrom": [
+            "customer_id"
+          ],
+          "columnsTo": [
+            "customer_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_rental_inventory": {
+          "name": "fk_rental_inventory",
+          "tableFrom": "rental",
+          "tableTo": "inventory",
+          "columnsFrom": [
+            "inventory_id"
+          ],
+          "columnsTo": [
+            "inventory_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_rental_staff": {
+          "name": "fk_rental_staff",
+          "tableFrom": "rental",
+          "tableTo": "staff",
+          "columnsFrom": [
+            "staff_id"
+          ],
+          "columnsTo": [
+            "staff_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {
+        "rental_date": {
+          "name": "rental_date",
+          "columns": [
+            "rental_date",
+            "inventory_id",
+            "customer_id"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "staff": {
+      "name": "staff",
+      "columns": {
+        "staff_id": {
+          "autoincrement": true,
+          "name": "staff_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "autoincrement": false,
+          "name": "first_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "autoincrement": false,
+          "name": "last_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address_id": {
+          "autoincrement": false,
+          "name": "address_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "picture": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "picture",
+          "type": "blob",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "email",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "store_id": {
+          "autoincrement": false,
+          "name": "store_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "default": 1,
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint(1)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "autoincrement": false,
+          "name": "username",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "password",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_store_id": {
+          "name": "idx_fk_store_id",
+          "columns": [
+            "store_id"
+          ],
+          "isUnique": false
+        },
+        "idx_fk_address_id": {
+          "name": "idx_fk_address_id",
+          "columns": [
+            "address_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_staff_address": {
+          "name": "fk_staff_address",
+          "tableFrom": "staff",
+          "tableTo": "address",
+          "columnsFrom": [
+            "address_id"
+          ],
+          "columnsTo": [
+            "address_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_staff_store": {
+          "name": "fk_staff_store",
+          "tableFrom": "staff",
+          "tableTo": "store",
+          "columnsFrom": [
+            "store_id"
+          ],
+          "columnsTo": [
+            "store_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "store": {
+      "name": "store",
+      "columns": {
+        "store_id": {
+          "autoincrement": true,
+          "name": "store_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "manager_staff_id": {
+          "autoincrement": false,
+          "name": "manager_staff_id",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address_id": {
+          "autoincrement": false,
+          "name": "address_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_update": {
+          "default": "'current_timestamp()'",
+          "autoincrement": false,
+          "name": "last_update",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_fk_address_id": {
+          "name": "idx_fk_address_id",
+          "columns": [
+            "address_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "fk_store_address": {
+          "name": "fk_store_address",
+          "tableFrom": "store",
+          "tableTo": "address",
+          "columnsFrom": [
+            "address_id"
+          ],
+          "columnsTo": [
+            "address_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "fk_store_staff": {
+          "name": "fk_store_staff",
+          "tableFrom": "store",
+          "tableTo": "staff",
+          "columnsFrom": [
+            "manager_staff_id"
+          ],
+          "columnsTo": [
+            "staff_id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {
+        "idx_unique_manager": {
+          "name": "idx_unique_manager",
+          "columns": [
+            "manager_staff_id"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    }
+  },
+  "views": {
+    "actor_info": {
+      "columns": {
+        "actor_id": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "actor_id",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "autoincrement": false,
+          "name": "first_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "autoincrement": false,
+          "name": "last_name",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "film_info": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "film_info",
+          "type": "mediumtext",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "isExisting": false,
+      "name": "actor_info",
+      "algorithm": "undefined",
+      "definition": "select `a`.`actor_id` AS `actor_id`,`a`.`first_name` AS `first_name`,`a`.`last_name` AS `last_name`,group_concat(distinct concat(`c`.`name`,': ',(select group_concat(`f`.`title` order by `f`.`title` ASC separator ', ') from ((`sakila`.`film` `f` join `sakila`.`film_category` `fc` on(`f`.`film_id` = `fc`.`film_id`)) join `sakila`.`film_actor` `fa` on(`f`.`film_id` = `fa`.`film_id`)) where `fc`.`category_id` = `c`.`category_id` and `fa`.`actor_id` = `a`.`actor_id`)) order by `c`.`name` ASC separator '; ') AS `film_info` from (((`sakila`.`actor` `a` left join `sakila`.`film_actor` `fa` on(`a`.`actor_id` = `fa`.`actor_id`)) left join `sakila`.`film_category` `fc` on(`fa`.`film_id` = `fc`.`film_id`)) left join `sakila`.`category` `c` on(`fc`.`category_id` = `c`.`category_id`)) group by `a`.`actor_id`,`a`.`first_name`,`a`.`last_name`",
+      "sqlSecurity": "invoker"
+    },
+    "customer_list": {
+      "columns": {
+        "ID": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "ID",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "default": "''''''",
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(91)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "autoincrement": false,
+          "name": "address",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "zip code": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "zip code",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "autoincrement": false,
+          "name": "phone",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "autoincrement": false,
+          "name": "city",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "country": {
+          "autoincrement": false,
+          "name": "country",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notes": {
+          "default": "''''''",
+          "autoincrement": false,
+          "name": "notes",
+          "type": "varchar(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SID": {
+          "autoincrement": false,
+          "name": "SID",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "isExisting": false,
+      "name": "customer_list",
+      "algorithm": "undefined",
+      "definition": "select `cu`.`customer_id` AS `ID`,concat(`cu`.`first_name`,' ',`cu`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`sakila`.`city`.`city` AS `city`,`sakila`.`country`.`country` AS `country`,if(`cu`.`active`,'active','') AS `notes`,`cu`.`store_id` AS `SID` from (((`sakila`.`customer` `cu` join `sakila`.`address` `a` on(`cu`.`address_id` = `a`.`address_id`)) join `sakila`.`city` on(`a`.`city_id` = `sakila`.`city`.`city_id`)) join `sakila`.`country` on(`sakila`.`city`.`country_id` = `sakila`.`country`.`country_id`))",
+      "sqlSecurity": "definer"
+    },
+    "film_list": {
+      "columns": {
+        "FID": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "FID",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "default": "'4.99'",
+          "autoincrement": false,
+          "name": "price",
+          "type": "decimal(4,2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "length": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "length",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating": {
+          "default": "'''G'''",
+          "autoincrement": false,
+          "name": "rating",
+          "type": "enum('G','PG','PG-13','R','NC-17')",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "actors": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "actors",
+          "type": "mediumtext",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "isExisting": false,
+      "name": "film_list",
+      "algorithm": "undefined",
+      "definition": "select `sakila`.`film`.`film_id` AS `FID`,`sakila`.`film`.`title` AS `title`,`sakila`.`film`.`description` AS `description`,`sakila`.`category`.`name` AS `category`,`sakila`.`film`.`rental_rate` AS `price`,`sakila`.`film`.`length` AS `length`,`sakila`.`film`.`rating` AS `rating`,group_concat(concat(`sakila`.`actor`.`first_name`,' ',`sakila`.`actor`.`last_name`) separator ', ') AS `actors` from ((((`sakila`.`film` left join `sakila`.`film_category` on(`sakila`.`film_category`.`film_id` = `sakila`.`film`.`film_id`)) left join `sakila`.`category` on(`sakila`.`category`.`category_id` = `sakila`.`film_category`.`category_id`)) left join `sakila`.`film_actor` on(`sakila`.`film`.`film_id` = `sakila`.`film_actor`.`film_id`)) left join `sakila`.`actor` on(`sakila`.`film_actor`.`actor_id` = `sakila`.`actor`.`actor_id`)) group by `sakila`.`film`.`film_id`,`sakila`.`category`.`name`",
+      "sqlSecurity": "definer"
+    },
+    "nicer_but_slower_film_list": {
+      "columns": {
+        "FID": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "FID",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "default": "'4.99'",
+          "autoincrement": false,
+          "name": "price",
+          "type": "decimal(4,2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "length": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "length",
+          "type": "smallint(5) unsigned",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rating": {
+          "default": "'''G'''",
+          "autoincrement": false,
+          "name": "rating",
+          "type": "enum('G','PG','PG-13','R','NC-17')",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "actors": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "actors",
+          "type": "mediumtext",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "isExisting": false,
+      "name": "nicer_but_slower_film_list",
+      "algorithm": "undefined",
+      "definition": "select `sakila`.`film`.`film_id` AS `FID`,`sakila`.`film`.`title` AS `title`,`sakila`.`film`.`description` AS `description`,`sakila`.`category`.`name` AS `category`,`sakila`.`film`.`rental_rate` AS `price`,`sakila`.`film`.`length` AS `length`,`sakila`.`film`.`rating` AS `rating`,group_concat(concat(concat(ucase(substr(`sakila`.`actor`.`first_name`,1,1)),lcase(substr(`sakila`.`actor`.`first_name`,2,octet_length(`sakila`.`actor`.`first_name`))),' ',concat(ucase(substr(`sakila`.`actor`.`last_name`,1,1)),lcase(substr(`sakila`.`actor`.`last_name`,2,octet_length(`sakila`.`actor`.`last_name`)))))) separator ', ') AS `actors` from ((((`sakila`.`film` left join `sakila`.`film_category` on(`sakila`.`film_category`.`film_id` = `sakila`.`film`.`film_id`)) left join `sakila`.`category` on(`sakila`.`category`.`category_id` = `sakila`.`film_category`.`category_id`)) left join `sakila`.`film_actor` on(`sakila`.`film`.`film_id` = `sakila`.`film_actor`.`film_id`)) left join `sakila`.`actor` on(`sakila`.`film_actor`.`actor_id` = `sakila`.`actor`.`actor_id`)) group by `sakila`.`film`.`film_id`,`sakila`.`category`.`name`",
+      "sqlSecurity": "definer"
+    },
+    "sales_by_film_category": {
+      "columns": {
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total_sales": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "total_sales",
+          "type": "decimal(27,2)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "isExisting": false,
+      "name": "sales_by_film_category",
+      "algorithm": "undefined",
+      "definition": "select `c`.`name` AS `category`,sum(`p`.`amount`) AS `total_sales` from (((((`sakila`.`payment` `p` join `sakila`.`rental` `r` on(`p`.`rental_id` = `r`.`rental_id`)) join `sakila`.`inventory` `i` on(`r`.`inventory_id` = `i`.`inventory_id`)) join `sakila`.`film` `f` on(`i`.`film_id` = `f`.`film_id`)) join `sakila`.`film_category` `fc` on(`f`.`film_id` = `fc`.`film_id`)) join `sakila`.`category` `c` on(`fc`.`category_id` = `c`.`category_id`)) group by `c`.`name` order by sum(`p`.`amount`) desc",
+      "sqlSecurity": "definer"
+    },
+    "sales_by_store": {
+      "columns": {
+        "store": {
+          "default": "''''''",
+          "autoincrement": false,
+          "name": "store",
+          "type": "varchar(101)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "manager": {
+          "default": "''''''",
+          "autoincrement": false,
+          "name": "manager",
+          "type": "varchar(91)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total_sales": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "total_sales",
+          "type": "decimal(27,2)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "isExisting": false,
+      "name": "sales_by_store",
+      "algorithm": "undefined",
+      "definition": "select concat(`c`.`city`,',',`cy`.`country`) AS `store`,concat(`m`.`first_name`,' ',`m`.`last_name`) AS `manager`,sum(`p`.`amount`) AS `total_sales` from (((((((`sakila`.`payment` `p` join `sakila`.`rental` `r` on(`p`.`rental_id` = `r`.`rental_id`)) join `sakila`.`inventory` `i` on(`r`.`inventory_id` = `i`.`inventory_id`)) join `sakila`.`store` `s` on(`i`.`store_id` = `s`.`store_id`)) join `sakila`.`address` `a` on(`s`.`address_id` = `a`.`address_id`)) join `sakila`.`city` `c` on(`a`.`city_id` = `c`.`city_id`)) join `sakila`.`country` `cy` on(`c`.`country_id` = `cy`.`country_id`)) join `sakila`.`staff` `m` on(`s`.`manager_staff_id` = `m`.`staff_id`)) group by `s`.`store_id` order by `cy`.`country`,`c`.`city`",
+      "sqlSecurity": "definer"
+    },
+    "staff_list": {
+      "columns": {
+        "ID": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "ID",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "default": "''''''",
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(91)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "autoincrement": false,
+          "name": "address",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "zip code": {
+          "default": "'NULL'",
+          "autoincrement": false,
+          "name": "zip code",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "autoincrement": false,
+          "name": "phone",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "city": {
+          "autoincrement": false,
+          "name": "city",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "country": {
+          "autoincrement": false,
+          "name": "country",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SID": {
+          "autoincrement": false,
+          "name": "SID",
+          "type": "tinyint(3) unsigned",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "isExisting": false,
+      "name": "staff_list",
+      "algorithm": "undefined",
+      "definition": "select `s`.`staff_id` AS `ID`,concat(`s`.`first_name`,' ',`s`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`sakila`.`city`.`city` AS `city`,`sakila`.`country`.`country` AS `country`,`s`.`store_id` AS `SID` from (((`sakila`.`staff` `s` join `sakila`.`address` `a` on(`s`.`address_id` = `a`.`address_id`)) join `sakila`.`city` on(`a`.`city_id` = `sakila`.`city`.`city_id`)) join `sakila`.`country` on(`sakila`.`city`.`country_id` = `sakila`.`country`.`country_id`))",
+      "sqlSecurity": "definer"
+    }
+  },
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}
